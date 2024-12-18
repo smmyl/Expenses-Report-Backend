@@ -4,7 +4,7 @@ from rest_framework import status
 from .models import Names
 from .serializers import NamesSerializer
 
-class Namesiew(APIView):
+class NamesView(APIView):
     def post(self, request):
         serializer = NamesSerializer(data=request.data)
         if serializer.is_valid():
