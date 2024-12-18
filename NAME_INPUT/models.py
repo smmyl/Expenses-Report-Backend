@@ -1,4 +1,4 @@
 from django.db import models
 
-class Name(models.Model):
-    name = models.CharField(max_length=32)
+class Names(models.Model):
+    names = models.CharField(max_length=32)

@@ -1,7 +1,12 @@
-from rest_framework import viewsets
-from .serializers import NameSerializer
-from .models import Name
+from .serializers import NamesSerializer
+from .models import Names
+from django.shortcuts import render
+from rest_framework import generics
 
-class NameViewSet(viewsets.ModelViewSet):
-    queryset = Name.objects.all()
-    serializer_class = NameSerializer
+class NamesList(generics.ListCreateAPIView):
+    queryset = Names.objects.all()
+    serializer_class = NamesSerializer
+
+class NamesDetail(generics.RetrieveUpdateDeestroyAPIView):
+    queryset = Names.objects.all().order_by('id')
+    serializer_class = NamesSerializer

@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Name
+from .models import Names
 
-class NameSerializer(serializers.ModelSerializer):
+class NamesSerializer(serializers.ModelSerializer):
    class Meta:
-       model = Name
-       fields = ('name')
+       model = Names
+       fields = ('names')
