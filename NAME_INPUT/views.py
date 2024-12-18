@@ -1,12 +1,13 @@
-from .serializers import NamesSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 from .models import Names
-from django.shortcuts import render
-from rest_framework import generics
+from .serializers import NamesSerializer
 
-class NamesList(generics.ListCreateAPIView):
-    queryset = Names.objects.all()
-    serializer_class = NamesSerializer
-
-class NamesDetail(generics.RetrieveUpdateDeestroyAPIView):
-    queryset = Names.objects.all().order_by('id')
-    serializer_class = NamesSerializer
+class Namesiew(APIView):
+    def post(self, request):
+        serializer = NamesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
