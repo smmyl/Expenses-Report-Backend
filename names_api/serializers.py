@@ -4,4 +4,4 @@ from .models import Names
 class NamesSerializer(serializers.ModelSerializer):
    class Meta:
        model = Names
-       fields = ('names')
+       fields = ['names']

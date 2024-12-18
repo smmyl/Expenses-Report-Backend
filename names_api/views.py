@@ -1,13 +1,13 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from .models import Names
+from rest_framework import generics
 from .serializers import NamesSerializer
+from .models import Names
 
-class NamesView(APIView):
-    def post(self, request):
-        serializer = NamesSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class NamesList(generics.ListCreateAPIView):
+   queryset = Names.objects.all().order_by('id')
+   serializer_class = NamesSerializer
+
+
+class NamesDetail(generics.RetrieveUpdateDestroyAPIView):
+   queryset = Names.objects.all().order_by('id')
+   serializer_class = NamesSerializer
